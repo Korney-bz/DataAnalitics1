@@ -15,7 +15,7 @@ class Man:
             'Сытость - {}'.format(self.name, self.fullness))
 
     def eat(self):
-        if self.food >= 10:
+        if self.house.food >= 10:
             print('{} поел'.format(self.name))
             self.fullness += 10
             self.house.food -= 10
@@ -23,7 +23,7 @@ class Man:
             print('{} нет еды'.format(self.name))
 
     def work(self):
-        cprint('{} сходил на работу'.format(self.name), color='grey')
+        cprint('{} сходил на работу'.format(self.name), color='cyan')
         self.house.money += 50
         self.fullness -= 10
 
@@ -46,7 +46,7 @@ class Man:
 
     def act(self):
         if self.fullness <= 0:
-            print('{} еды нет, Вася отъехать может'.format(self.name))
+            print('{} еды нет'.format(self.name))
             return
         dice = randint(1, 6)
         if self.fullness < 20:
@@ -55,12 +55,12 @@ class Man:
             self.shopping()
         elif self.house.money < 50:
             self.work()
-        elif dice == 1:
+        if dice == 1:
             self.work()
         elif dice == 2:
             self.eat()
         else:
-            self.play_APEX()
+            self.watchtv()
 
 
 class House:
@@ -68,12 +68,23 @@ class House:
         self.food = 10
         self.money = 50
 
+    def __str__(self):
+        return 'В дома осталось еды {}, Денег осталоь {}'.format(self.food, self.money)
+
 
 beavis = Man(name='Бивис')
 butthead = Man(name='Батхет')
+
+my_sweet_home = House()
+
+beavis.go_in_to_house(house=my_sweet_home)
+butthead.go_in_to_house(house=my_sweet_home)
+
 for day in range(1, 21):
     cprint('================== день {} ================='.format(day), color='yellow')
     beavis.act()
     butthead.act()
+    print('-------------------------')
     print(beavis)
     print(butthead)
+    print(my_sweet_home)
