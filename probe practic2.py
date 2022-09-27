@@ -24,7 +24,7 @@ class Man:
 
     def work(self):
         cprint('{} сходил на работу'.format(self.name), color='cyan')
-        self.house.money += 50
+        self.house.money += 100
         self.fullness -= 10
 
     def watchtv(self):
@@ -46,7 +46,7 @@ class Man:
 
     def act(self):
         if self.fullness <= 0:
-            print('{} еды нет'.format(self.name))
+            cprint('{} ПОТРАЧЕНО!'.format(self.name), color='red')
             return
         dice = randint(1, 6)
         if self.fullness < 20:
@@ -55,7 +55,7 @@ class Man:
             self.shopping()
         elif self.house.money < 50:
             self.work()
-        if dice == 1:
+        elif dice == 1:
             self.work()
         elif dice == 2:
             self.eat()
@@ -69,7 +69,7 @@ class House:
         self.money = 50
 
     def __str__(self):
-        return 'В дома осталось еды {}, Денег осталоь {}'.format(self.food, self.money)
+        return 'В дома осталось еды {}, Денег осталось {}'.format(self.food, self.money)
 
 
 beavis = Man(name='Бивис')
