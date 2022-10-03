@@ -75,6 +75,8 @@ class House:
 citizens = [
     Man(name='Бивис'),
     Man(name='Батхет'),
+    Man(name='Кенни'),
+    Man(name='Гомер'),
 ]
 
 my_sweet_home = House()
