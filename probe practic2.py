@@ -33,7 +33,7 @@ class Man:
 
     def shopping(self):
         if self.house.money >= 50:
-            cprint('{} сходил в магазин за едой'.format(self.name), color='white')
+            cprint('{} сходил в магазин за едой'.format(self.name), color='blue')
             self.house.money -= 50
             self.house.food += 50
         else:
@@ -72,19 +72,21 @@ class House:
         return 'В дома осталось еды {}, Денег осталось {}'.format(self.food, self.money)
 
 
-beavis = Man(name='Бивис')
-butthead = Man(name='Батхет')
+citizens = [
+    Man(name='Бивис'),
+    Man(name='Батхет'),
+]
 
 my_sweet_home = House()
+for citizen in citizens:
+    citizen.go_in_to_house(house=my_sweet_home)
 
-beavis.go_in_to_house(house=my_sweet_home)
-butthead.go_in_to_house(house=my_sweet_home)
-
-for day in range(1, 21):
+for day in range(1, 366):
     cprint('================== день {} ================='.format(day), color='yellow')
-    beavis.act()
-    butthead.act()
-    print('-------------------------')
-    print(beavis)
-    print(butthead)
+    for citizen in citizens:
+        citizen.act()
+    print('-----------в конце дня--------------')
+    for citizen in citizens:
+        citizen.act()
+    print(citizen)
     print(my_sweet_home)
